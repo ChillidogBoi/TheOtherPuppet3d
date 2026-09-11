@@ -3,6 +3,9 @@ extends Node
 
 @export var currentState: State
 
+func _ready():
+	assert(currentState != null, "Exported variable \"currentState\" not initialized to type \"State\"")
+	currentState.enter_function()
 
 func _physics_process(delta):
 	var inputs: int = get_inputs()
@@ -11,10 +14,14 @@ func _physics_process(delta):
 	
 	# handle state changes
 	var correct_state: String = currentState.correct_state_test(inputs)
-	if correct_state == "self": return
+	if correct_state == "STAY_AS_SELF": return
+	print(correct_state)
 	currentState.exit_function()
 	currentState = find_child(correct_state)
 	currentState.enter_function() # currentState is the new state here
+
+func _process(delta):
+	currentState.function(delta)
 
 func get_inputs() -> int:
 	return 0

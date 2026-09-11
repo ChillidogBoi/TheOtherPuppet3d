@@ -1,0 +1,13 @@
+extends PlayerMoveState
+
+
+func premove_function(_delta: float, _inputs:int):
+	body.velocity += body.get_gravity() * _delta
+	body.move_and_slide()
+
+func correct_state_test(_inputs:int) -> String:
+	if not body.is_on_floor(): return CURRENT_STATE_IS_CORRECT
+	
+	if _inputs & INPUT_NAMES.ANY_DIRECTION: return "Walk"
+	
+	return "Idle"
