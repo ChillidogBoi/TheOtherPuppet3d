@@ -1,0 +1,3 @@
+the name of the Font Designer or pseudonym (“Dragon8er”);
+the title of the Font Software (“Crypt of Tomorrow”);
+the URI (https://fontstruct.com/fontstructions/show/1791090) from where the Font was originally downloaded.
