@@ -6,12 +6,12 @@ enum INPUT_NAMES {
 	JUMP = 16, JUMP_HELD = 32, MENU = 64,
 }
 const TRACKED_INPUT_HELD_ACTIONS = {
-	"north" = INPUT_NAMES.NORTH, "east" = INPUT_NAMES.EAST,
-	"south" = INPUT_NAMES.SOUTH, "west" = INPUT_NAMES.WEST,
+	"move_forwards" = INPUT_NAMES.NORTH, "strafe_right" = INPUT_NAMES.EAST,
+	"move_backwards" = INPUT_NAMES.SOUTH, "strafe_left" = INPUT_NAMES.WEST,
 	"jump" = INPUT_NAMES.JUMP_HELD
 }
 const TRACKED_INPUT_TAP_ACTIONS = {
-	"jump" = INPUT_NAMES.JUMP, "menu" = INPUT_NAMES.MENU
+	"jump" = INPUT_NAMES.JUMP, "pause_(menu)" = INPUT_NAMES.MENU
 }
 
 @export var body: CharacterBody3D

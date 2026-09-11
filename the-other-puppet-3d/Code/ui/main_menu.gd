@@ -14,4 +14,4 @@ func _ready():
 
 
 func _on_options_pressed():
-	pass
+	transitions.play("main -> options")
