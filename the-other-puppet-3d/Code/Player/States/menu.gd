@@ -4,11 +4,14 @@ extends PlayerState
 var closing := false
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	assert(menu != null, "Exported variable \"menu\" not initialized to type \"Control\"")
 func enter_function():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	menu.visible = true
 	closing = false
 func exit_function():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	menu.visible = false
 
 
