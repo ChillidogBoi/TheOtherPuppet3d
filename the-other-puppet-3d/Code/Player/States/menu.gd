@@ -1,10 +1,15 @@
 extends PlayerState
 
 @export var menu: Control = null
-var closing := true
+var closing := false
 
 func _ready():
 	assert(menu != null, "Exported variable \"menu\" not initialized to type \"Control\"")
+func enter_function():
+	menu.visible = true
+	closing = false
+func exit_function():
+	menu.visible = false
 
 
 func correct_state_test(_inputs:int) -> String:

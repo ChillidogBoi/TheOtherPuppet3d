@@ -15,7 +15,6 @@ func premove_function(_delta: float, _inputs:int):
 	body.move_and_slide()
 
 func correct_state_test(_inputs:int) -> String:
-	print(_inputs & INPUT_NAMES.JUMP_HELD)
 	if time > MAX_JUMP_LENGTH: return "Fall"
 	if (_inputs & INPUT_NAMES.JUMP_HELD) == 0: return "Fall"
 	return CURRENT_STATE_IS_CORRECT

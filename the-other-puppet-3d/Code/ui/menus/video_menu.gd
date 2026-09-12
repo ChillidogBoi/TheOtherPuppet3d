@@ -50,4 +50,3 @@ func _on_window_size_pressed():
 		current_window.mode = Window.MODE_FULLSCREEN
 	
 	window_size_label.text = VALID_SCREEN_SIZE_NAMES[current]
-	print(window_size_label.text)

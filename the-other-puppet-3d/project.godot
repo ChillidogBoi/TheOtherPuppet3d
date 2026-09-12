@@ -14,7 +14,6 @@ config/name="The Other Puppet 3d"
 run/main_scene="uid://ce3lbctupm3qn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/show_image=false
 boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 boot_splash/image="uid://b6lwfrntspmd5"
@@ -28,7 +27,7 @@ Settings="*uid://d3vlqvf2kpeuk"
 
 window/size/viewport_width=640
 window/size/viewport_height=480
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
 [dotnet]

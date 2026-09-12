@@ -18,5 +18,4 @@ func _on_gui_input(event: InputEvent):
 	if event.button_index != 1:
 		Input.parse_input_event(event)
 		return
-	print(0)
 	button.pressed.emit()

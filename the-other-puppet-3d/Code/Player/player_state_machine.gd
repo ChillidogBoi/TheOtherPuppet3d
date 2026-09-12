@@ -31,5 +31,5 @@ func get_inputs() -> int:
 	for held_action in TRACKED_INPUT_HELD_ACTIONS.keys():
 		if Input.is_action_pressed(held_action): bitflagmap |= TRACKED_INPUT_HELD_ACTIONS[held_action]
 	for tap_action in TRACKED_INPUT_TAP_ACTIONS.keys():
-		if Input.is_action_pressed(tap_action): bitflagmap |= TRACKED_INPUT_TAP_ACTIONS[tap_action]
+		if Input.is_action_just_pressed(tap_action): bitflagmap |= TRACKED_INPUT_TAP_ACTIONS[tap_action]
 	return bitflagmap

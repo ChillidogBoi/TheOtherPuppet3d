@@ -20,7 +20,7 @@ func _process(delta):
 func _ready():
 	await RenderingServer.frame_post_draw
 	assert(loading_screen != null, "Exported variable \"loading_screen\" not initialized to type \"AnimationPlayer\"")
-	loading_screen.play_backwards("fade_in")
+	loading_screen.get_child(0).visible = false
 	assert(initial_button != null, "Exported variable \"initial_button\" not initialized to type \"Button\"")
 	initial_button.grab_focus()
 
@@ -35,3 +35,9 @@ func _on_options_pressed():
 func _on_button_mouse_entered():
 	if not options.visible: return
 	transitions.play_backwards("main -> options")
+
+
+func _on_play_pressed():
+	loading_screen.get_child(0).visible = true
+	var new_scene: Node = load("uid://bijidkcfh2r6h").instantiate()
+	get_tree().change_scene_to_node(new_scene)

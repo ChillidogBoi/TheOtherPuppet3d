@@ -22,7 +22,6 @@ func _unhandled_input(event):
 	if event.as_text() == "Mouse Wheel Down":
 		v_slider.value += 1
 		return
-	print(event.as_text(),"|",v_slider.value)
 	last_button_pressed = event
 	button_pressed.emit()
 
