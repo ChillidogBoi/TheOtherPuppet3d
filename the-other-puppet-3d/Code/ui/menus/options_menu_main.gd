@@ -8,12 +8,15 @@ enum TABS {
 @export var tabs: Array[Control] = []
 
 func _ready():
-	change_to_tab(TABS.VIDEO)
+	change_to_tab(TABS.VIDEO, false)
 
-func change_to_tab(tab:int):
+func change_to_tab(tab:int, enter:bool = true):
 	for n: int in tabs.size():
 		if n != tab: tabs[n].visible = false
 		else: tabs[n].visible = true
+		
+	if not enter: return
+#	tabs[tab].find_next_valid_focus().grab_focus()
 
 func _on_video_tab_pressed():
 	change_to_tab(TABS.VIDEO)
