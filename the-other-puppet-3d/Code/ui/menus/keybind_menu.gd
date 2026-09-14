@@ -7,6 +7,7 @@ var item_thickness: int
 var children: Array[Node]
 @onready var mouse = $MouseSens/SpinBox
 @onready var stick = $StickSens/SpinBox
+@onready var parent = $".."
 
 
 func _ready():
@@ -16,6 +17,7 @@ func _ready():
 	children = get_children()
 
 func _unhandled_input(event):
+	if not parent.visible: return
 	if event is InputEventMouseMotion: return
 	if not event.is_pressed(): return
 	if event.as_text() == "Escape": return
@@ -28,6 +30,14 @@ func _unhandled_input(event):
 	last_button_pressed = event
 	button_pressed.emit()
 
+func _physics_process(delta):
+	if not parent.visible: return
+	if Input.is_action_just_pressed("ui_up"):
+		v_slider.value -= 1
+		return
+	if Input.is_action_just_pressed("ui_down"):
+		v_slider.value += 1
+		return
 
 func _on_v_slider_value_changed(value):
 	for n:int in children.size():
@@ -47,11 +57,11 @@ func _on_mouse_changed(value):
 
 func _on_stick_up_pressed():
 	if stick.value >= 999: return
-	Settings.stick_sensitivity += 1 / pow(2, 12)
+	Settings.controller_sensitivity += 1 / pow(2, 12)
 	stick.value += 1
 func _on_stick_down_pressed():
 	if stick.value <= 0: return
-	Settings.stick_sensitivity -= 1 / pow(2, 12)
+	Settings.controller_sensitivity -= 1 / pow(2, 12)
 	stick.value -= 1
 func _on_stick_changed(value):
-	Settings.stick_sensitivity = value / pow(2, 12)
+	Settings.controller_sensitivity = value / pow(2, 12)

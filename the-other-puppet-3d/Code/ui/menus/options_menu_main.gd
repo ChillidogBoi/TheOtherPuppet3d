@@ -6,6 +6,7 @@ enum TABS {
 	CONTROLS
 }
 @export var tabs: Array[Control] = []
+@onready var v_slider = $Controls/VSlider
 
 func _ready():
 	change_to_tab(TABS.VIDEO, false)
@@ -23,4 +24,5 @@ func _on_video_tab_pressed():
 func _on_audio_tab_pressed():
 	change_to_tab(TABS.AUDIO)
 func _on_controls_tab_pressed():
+	v_slider.value = 0
 	change_to_tab(TABS.CONTROLS)
