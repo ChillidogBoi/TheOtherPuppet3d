@@ -18,9 +18,8 @@ func _process(delta):
 	initial_button.grab_focus()
 
 func _ready():
-	await RenderingServer.frame_post_draw
 	assert(loading_screen != null, "Exported variable \"loading_screen\" not initialized to type \"AnimationPlayer\"")
-	loading_screen.get_child(0).visible = false
+	loading_screen.play_backwards("fade_in")
 	assert(initial_button != null, "Exported variable \"initial_button\" not initialized to type \"Button\"")
 	initial_button.grab_focus()
 

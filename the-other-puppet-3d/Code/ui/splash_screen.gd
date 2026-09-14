@@ -1,8 +1,12 @@
 extends Control
 
-const MAIN_MENUS = preload("uid://b6v2srrg2bj40")
+@onready var loading_screen = $LoadingScreen
+
 
 func _ready():
-	await RenderingServer.frame_post_draw
+	loading_screen.play("fade_in")
+	await loading_screen.animation_finished
+	
+	var MAIN_MENUS = load("uid://b6v2srrg2bj40")
 	var main_menu = MAIN_MENUS.instantiate()
 	get_tree().change_scene_to_node(main_menu)

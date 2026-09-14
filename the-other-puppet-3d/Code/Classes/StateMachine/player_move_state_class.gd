@@ -4,7 +4,8 @@ extends PlayerState
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var SPEED: float = 4.5
 
 func _ready():
-	SPEED *= 60.0 # adjust to meters per second
+#	SPEED *= 60.0 # adjust to meters per second
+	pass
 
 func correct_state_test(_inputs:int) -> String:
 	if not body.is_on_floor(): return "Fall"
@@ -26,7 +27,7 @@ func physics_function(_delta: float, _inputs:int):
 	).normalized()
 	
 	#                    adjust for camera facing direction      and lag 
-	input_direction = (body.transform.basis * input_direction) * _delta * SPEED # and apply speed
+	input_direction = (body.transform.basis * input_direction) * SPEED # and apply speed
 	body.velocity = Vector3(input_direction.x, body.velocity.y, input_direction.z) # apply to body
 	body.move_and_slide()
 
