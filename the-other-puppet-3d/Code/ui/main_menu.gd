@@ -37,6 +37,7 @@ func _on_button_mouse_entered():
 
 
 func _on_play_pressed():
-	loading_screen.get_child(0).visible = true
+	loading_screen.play("fade_in")
 	var new_scene: Node = load("uid://bijidkcfh2r6h").instantiate()
+	await loading_screen.animation_finished
 	get_tree().change_scene_to_node(new_scene)

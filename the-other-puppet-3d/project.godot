@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Settings="*uid://d3vlqvf2kpeuk"
+Party="*uid://bessjp5e0ho62"
 
 [display]
 
