@@ -17,6 +17,7 @@ func _physics_process(delta):
 	if correct_state == "STAY_AS_SELF": return
 	currentState.exit_function()
 	currentState = find_child(correct_state)
+	print(correct_state)
 	currentState.enter_function() # currentState is the new state here
 
 func _process(delta):

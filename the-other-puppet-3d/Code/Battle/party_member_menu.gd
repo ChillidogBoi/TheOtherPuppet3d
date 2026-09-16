@@ -4,26 +4,30 @@ extends Control
 @export var character: PartyCombatant
 @export var character_portrait: Texture2D
 
-@onready var progress_bar = $VBoxContainer/Cover/ProgressBar
-@onready var portrait = $VBoxContainer/Cover/Portrait
-@onready var name_label = $VBoxContainer/Cover/Name
+@onready var progress_bar := $VBoxContainer/Cover/ProgressBar
+@onready var portrait := $VBoxContainer/Cover/Portrait
+@onready var name_label := $VBoxContainer/Cover/Name
 @onready var performs: Array[Control] = [
 	$VBoxContainer/Buttons/HBoxContainer/ACT, $VBoxContainer/Buttons/HBoxContainer/Magic]
-@onready var initial_button = $VBoxContainer/Buttons/HBoxContainer/Fight
-@onready var align_me = [$VBoxContainer/Cover, $VBoxContainer/Buttons]
-@onready var item_button = $VBoxContainer/Buttons/HBoxContainer/Item
-@onready var grid_container = $VBoxContainer/ColorRect/GridContainer
-@onready var buttons = $VBoxContainer/Buttons
-@onready var cover = $VBoxContainer/Cover
+@onready var initial_button := $VBoxContainer/Buttons/HBoxContainer/Fight
+@onready var align_me := [$VBoxContainer/Cover, $VBoxContainer/Buttons]
+@onready var item_button := $VBoxContainer/Buttons/HBoxContainer/Item
+@onready var more_buttons := $VBoxContainer/ColorRect/MoreButtons
+@onready var buttons := $VBoxContainer/Buttons
+@onready var cover := $VBoxContainer/Cover
+@onready var item_desc_label := $VBoxContainer/ColorRect/MoreButtons/Label
+@onready var v_box_container := $VBoxContainer
+@onready var hp_label := $VBoxContainer/Cover/HpLabel
+
 
 const PANEL_1 = preload("uid://i83mt0qkyagd")
 const PANEL_2 = preload("uid://wcmo0xppvm0e")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	grid_container.visible = false
+	more_buttons.visible = false
 	buttons.visible = false
+	v_box_container.position = Vector2(0, 338)
 	cover.set("theme_override_styles/panel", PANEL_2)
 	
 	portrait.texture = character_portrait
@@ -32,6 +36,7 @@ func _ready():
 	
 	progress_bar.max_value = character.max_HP
 	progress_bar.value = character.current_HP
+	hp_label.text = str(character.current_HP, " / ", character.max_HP)
 	
 	for n in performs:
 		n.visible = false
@@ -53,25 +58,8 @@ func _ready():
 		node.self_modulate = character.ui_color
 
 
-func _on_button1_pressed():
-	pass # Replace with function body.
-
-
-func _on_button2_pressed():
-	pass # Replace with function body.
-
-
-func _on_button3_pressed():
-	pass # Replace with function body.
-
-
-func _on_button4_pressed():
-	pass # Replace with function body.
-
-
-func _on_button5_pressed():
-	pass # Replace with function body.
-
-
-func _on_button6_pressed():
-	pass # Replace with function body.
+func open_menu():
+	buttons.visible = true
+	cover.set("theme_override_styles/panel", PANEL_1)
+	v_box_container.position = Vector2(0, 304)
+	initial_button.grab_focus()
