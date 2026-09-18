@@ -9,7 +9,6 @@ extends Combatant
 @export var attacks: Array[String]
 @export var spells: Array[String]
 @export var acts: Array[String]
-@export var items: Array[String]
 
 @export_category("Cosmetic")
 @export var ui_color: Color

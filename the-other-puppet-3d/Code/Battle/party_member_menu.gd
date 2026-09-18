@@ -12,12 +12,13 @@ extends Control
 @onready var initial_button := $VBoxContainer/Buttons/HBoxContainer/Fight
 @onready var align_me := [$VBoxContainer/Cover, $VBoxContainer/Buttons]
 @onready var item_button := $VBoxContainer/Buttons/HBoxContainer/Item
-@onready var more_buttons := $VBoxContainer/ColorRect/MoreButtons
+@onready var more_buttons := $VBoxContainer/ColorRect
 @onready var buttons := $VBoxContainer/Buttons
 @onready var cover := $VBoxContainer/Cover
 @onready var item_desc_label := $VBoxContainer/ColorRect/MoreButtons/Label
 @onready var v_box_container := $VBoxContainer
 @onready var hp_label := $VBoxContainer/Cover/HpLabel
+@onready var grid_container = $VBoxContainer/ColorRect/MoreButtons/GridContainer
 
 
 const PANEL_1 = preload("uid://i83mt0qkyagd")
@@ -25,7 +26,7 @@ const PANEL_2 = preload("uid://wcmo0xppvm0e")
 
 
 func _ready():
-	more_buttons.visible = false
+	more_buttons.modulate = Color(0,0,0,0)
 	buttons.visible = false
 	v_box_container.position = Vector2(0, 338)
 	cover.set("theme_override_styles/panel", PANEL_2)
@@ -63,3 +64,8 @@ func open_menu():
 	cover.set("theme_override_styles/panel", PANEL_1)
 	v_box_container.position = Vector2(0, 304)
 	initial_button.grab_focus()
+
+
+func _on_item_pressed():
+	more_buttons.modulate = Color(1,1,1,1)
+	grid_container.items_setup()
