@@ -2,6 +2,7 @@ extends StateMachine
 
 @export var party: Array[PartyCombatant]
 @export var enemy_party: Array[EnemyCombatant]
+@export var items: Array[BattleMove]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

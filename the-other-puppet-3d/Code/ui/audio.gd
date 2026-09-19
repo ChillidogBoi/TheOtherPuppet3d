@@ -23,6 +23,6 @@ func _on_sfx_up_pressed():
 func _on_sfx_down_pressed():
 	if Settings.sfx_volume <= 0: return
 	Settings.sfx_volume -= 10
-	sfx -= 1
+	sfx.value -= 1
 func _on_sfx_changed(value):
 	Settings.sfx_volume = value * 10

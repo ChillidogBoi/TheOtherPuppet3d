@@ -6,9 +6,9 @@ extends Combatant
 
 @export_category("Battle Choices")
 @export_enum("ACTs", "Magic") var can_perform: int
-@export var attacks: Array[String]
-@export var spells: Array[String]
-@export var acts: Array[String]
+@export var attack: BattleMove
+@export var defend_move: BattleMove
+@export var spells_or_acts: Array[BattleMove]
 
 @export_category("Cosmetic")
 @export var ui_color: Color

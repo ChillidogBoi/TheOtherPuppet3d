@@ -9,7 +9,7 @@ extends Resource
 @export_enum("1 Enemy", "All Enemies", "1 Ally", "All Allies", "All") var targets_who: int
 
 
-func execute(target: Combatant = null, timing_bonus: int = 1):
+func execute(target: Combatant = null, timing_bonus: float = 1):
 	if damage_type == 0: return
 	if not requires_timing: timing_bonus = 1
 	
@@ -32,7 +32,7 @@ func execute(target: Combatant = null, timing_bonus: int = 1):
 	for n in Party.party:
 		apply_damage(n, timing_bonus)
 
-func apply_damage(target: Combatant, timing_bonus: int = 1):
+func apply_damage(target: Combatant, timing_bonus: float = 1):
 	
 	if damage_type == 2:
 		target.current_mercy += damage_amount
