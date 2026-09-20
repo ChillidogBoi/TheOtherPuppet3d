@@ -9,10 +9,8 @@ func _ready():
 		if child is Button: button = child
 		if child is Label: label = child
 	label.connect("mouse_entered", button.grab_focus)
-	label.connect("mouse_entered", print.bind(0))
 	button.connect("mouse_entered", button.grab_focus)
 	label.connect("gui_input", _on_gui_input)
-	print(label, ", ", button)
 
 func _on_gui_input(event: InputEvent):
 	if not event is InputEventMouseButton: return

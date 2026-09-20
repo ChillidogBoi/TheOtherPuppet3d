@@ -38,7 +38,6 @@ func _on_move_button_pressed(move:BattleMove):
 			fight.grab_focus()
 			return
 	if move.requires_timing: tim = await get_timing()
-	print(tim)
 	move.execute(targ, tim)
 
 
@@ -55,6 +54,7 @@ func decide_target(target_party_mem := false) -> Combatant:
 func setup_buttons(from: Array, name_var: String, connect_to: Callable):
 	for c in get_children():
 		c.queue_free()
+	if from.size() == 0: return
 	var last_button: Button = null
 	for n in from:
 		var new_button = MENU_BUTTON.instantiate()
