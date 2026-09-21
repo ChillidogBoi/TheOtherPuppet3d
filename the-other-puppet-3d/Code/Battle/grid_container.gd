@@ -1,8 +1,10 @@
 extends GridContainer
 
-signal input_yes
 signal target_button_pressed(selection: Combatant)
+
 const MENU_BUTTON = preload("uid://c0u5nb8ob0god")
+const HEALTHBAR = preload("uid://ba2wfpmr2ai7a")
+
 @onready var color_rect = $"../.."
 @onready var fight_stuff = $"../../../ColorRect2"
 @onready var fight_anim = $"../../../ColorRect2/AnimationPlayer"
@@ -39,11 +41,12 @@ func _on_move_button_pressed(move:BattleMove):
 			return
 	if move.requires_timing: tim = await get_timing()
 	move.execute(targ, tim)
+	color_rect.get_parent().turn_finished.emit()
 
 
 func decide_target(target_party_mem := false) -> Combatant:
 	if target_party_mem: setup_buttons(Party.party, "display_name", target_button_pressed.emit)
-	else: setup_buttons(Party.enemy_party, "display_name", target_button_pressed.emit)
+	else: setup_buttons(Party.enemy_party, "display_name", target_button_pressed.emit, true)
 	
 	var ans = await target_button_pressed
 	color_rect.visible = false
@@ -51,7 +54,7 @@ func decide_target(target_party_mem := false) -> Combatant:
 	if ans is bool: return null
 	return ans
 
-func setup_buttons(from: Array, name_var: String, connect_to: Callable):
+func setup_buttons(from: Array, name_var: String, connect_to: Callable, has_healthbar := false):
 	for c in get_children():
 		c.queue_free()
 	if from.size() == 0: return
@@ -65,10 +68,31 @@ func setup_buttons(from: Array, name_var: String, connect_to: Callable):
 			op_button.focus_neighbor_left = op_button.get_path_to(last_button)
 		new_button.find_child("Label").text = n.get(name_var).capitalize()
 		
+		if has_healthbar:
+			var new_healthbar = HEALTHBAR.instantiate()
+			add_child(new_healthbar)
+			n.health_bars.append(new_healthbar.health_bar)
+			n.mercy_bar = new_healthbar.mercy_bar
+			var x = clamp(n.current_HP, 0, 100)
+			n.set("current_HP", 0)
+			n.set("current_HP", x)
+			x = clamp(n.current_mercy, 0, 100)
+			n.set("current_mercy", 0)
+			n.set("current_mercy", x)
+			
+			
+			if n.current_mercy >= n.required_mercy:
+				new_button.find_child("Label").modulate = Color(1, 1, 0)
+			
+		print(n)
 		last_button = op_button
 		last_button.pressed.connect(connect_to.bind(n))
 	
-	get_child(0).grab_focus()
+	get_child(0).find_child("Button").grab_focus()
+	
+	var new_size = from.size() * 35
+	if new_size > 105: color_rect.custom_minimum_size.y = new_size
+	else: color_rect.custom_minimum_size.y = 106
 
 
 func get_timing() -> float:

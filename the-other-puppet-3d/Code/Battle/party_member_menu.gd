@@ -1,5 +1,7 @@
 extends Control
 
+signal turn_finished
+
 @export_enum("Shrink Begin", "Shrink Center", "Shrink End") var align: int
 @export var character: PartyCombatant
 @export var character_portrait: Texture2D
