@@ -4,4 +4,4 @@ extends Node
 @export var enemy_party: Array[EnemyCombatant]
 @export var items: Array[BattleMove]
 
-@export var party_turn := 0
+@export var party_turn := -1

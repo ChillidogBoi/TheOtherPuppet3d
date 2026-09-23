@@ -30,10 +30,7 @@ const PANEL_2 = preload("uid://wcmo0xppvm0e")
 
 
 func _ready():
-	more_buttons.visible = false
-	buttons.visible = false
-	v_box_container.position = Vector2(0, 338)
-	cover.set("theme_override_styles/panel", PANEL_2)
+	close_menu()
 	
 	portrait.texture = character_portrait
 	for n: Control in align_me:
@@ -70,6 +67,12 @@ func open_menu():
 	v_box_container.position = Vector2(0, 304)
 	initial_button.grab_focus()
 
+func close_menu():
+	more_buttons.visible = false
+	buttons.visible = false
+	v_box_container.position = Vector2(0, 338)
+	cover.set("theme_override_styles/panel", PANEL_2)
+
 
 func _on_item_pressed():
 	more_buttons.visible = true
@@ -83,3 +86,7 @@ func _on_magic_or_act_pressed():
 func _on_defend_pressed():
 	more_buttons.visible = true
 	grid_container._on_move_button_pressed(character.defend_move)
+
+
+func update_hp():
+	hp_label.text = str(character.current_HP, " / ", character.max_HP)

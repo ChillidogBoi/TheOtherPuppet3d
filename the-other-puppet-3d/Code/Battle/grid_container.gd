@@ -41,7 +41,7 @@ func _on_move_button_pressed(move:BattleMove):
 			return
 	if move.requires_timing: tim = await get_timing()
 	move.execute(targ, tim)
-	color_rect.get_parent().turn_finished.emit()
+	color_rect.get_parent().get_parent().turn_finished.emit()
 
 
 func decide_target(target_party_mem := false) -> Combatant:
@@ -84,7 +84,6 @@ func setup_buttons(from: Array, name_var: String, connect_to: Callable, has_heal
 			if n.current_mercy >= n.required_mercy:
 				new_button.find_child("Label").modulate = Color(1, 1, 0)
 			
-		print(n)
 		last_button = op_button
 		last_button.pressed.connect(connect_to.bind(n))
 	
